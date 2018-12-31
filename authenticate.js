@@ -36,3 +36,16 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts,
     }));
 
 exports.verifyUser = passport.authenticate('jwt', {session: false});
+
+// Week 3 assignment: add code to check if a given user is an admin user.
+exports.verifyAdmin = function(req,res,next) {
+    if (req && req.user && req.user.admin) {
+        // User is admin. Call the next function in the chain.
+        return next();
+    } else {
+       // No dice. Unauthorized.
+       var err = new Error('You are not authorized to perform this operation!');
+       res.statusCode = 403;
+       return next(err);
+    }
+};
