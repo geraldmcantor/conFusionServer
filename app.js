@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Dishes  = require('./models/dishes');
+// Week 4 assignment. Pull in new Favorites mongoose model.
+const Favorites  = require('./models/favorites');
 
 var createError = require('http-errors');
 var express = require('express');
@@ -15,6 +17,8 @@ var dishRouter = require('./routes/dishRouter');
 var promoRouter = require('./routes/promoRouter');
 var leaderRouter = require('./routes/leaderRouter');
 var uploadRouter = require('./routes/uploadRouter');
+// Week 4 assignment. Pull in favorites router.
+var favoritesRouter = require('./routes/favoritesRouter');
 
 var passport = require('passport');
 var config = require('./config');
@@ -54,6 +58,8 @@ app.use('/dishes', dishRouter);
 app.use('/promotions', promoRouter);
 app.use('/leaders', leaderRouter);
 app.use('/imageUpload', uploadRouter);
+// Week 4 assignment. Mount /favorites onto favoritesRouter.
+app.use('/favorites', favoritesRouter);
 
 // Connect to the DB
 connect.then((db) => {
